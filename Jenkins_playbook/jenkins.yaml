@@ -1,0 +1,38 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: update ubuntu server
+    apt: 
+      update_cache: yes
+
+  - name: install java8 on ubuntu server
+    apt:
+     name: openjdk-8-jdk
+     state: present
+  
+  - name: install maven
+    apt:
+     name: maven
+     state: present
+
+  - name: ensure the jenkins apt repository key is installed
+    apt_key:
+     url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+     state: present
+
+  - name: ensure the repository is configured
+    apt_repository: 
+     repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+     state: present
+
+  - name: ensure jenkins is installed 
+    apt:
+     name: jenkins
+     update_cache: yes
+     state: present
+
+  - name: ensure jenkins is running
+    service: 
+     name: jenkins
+     state: started
