@@ -4,7 +4,7 @@
   tasks:
   - name: update ubuntu server
     apt: 
-      update_cache: yes
+      update_cache: 
 
   - name: install java8 on ubuntu server
     apt:
@@ -29,7 +29,7 @@
   - name: ensure jenkins is installed 
     apt:
      name: jenkins
-     update_cache: yes
+     update_cache: 
      state: present
 
   - name: ensure jenkins is running
